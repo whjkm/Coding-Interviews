@@ -4,8 +4,29 @@
 #include <algorithm>
 #include <map>
 using namespace std;
+
+//LeetCode 905
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        vector<int> res;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            if(nums[i] % 2 == 0)
+            {
+                res.insert(res.begin(),nums[i]);
+            }
+            else
+            {
+                res.push_back(nums[i]);
+            }
+        }
+        return res;
+    }
+};
+
 /***
-*½â·¨Ò»£ºÀàËÆÓÚÃ°ÅÝÅÅÐòµÄË¼Ïë£¬ÒÀ´Î±È½ÏÁ½¸öÏàÁÚµÄÔªËØ£¬Óöµ½Å¼ÊýÔÚÆæÊýÇ°Ãæ£¬¾Í½«Á½¸öÖµ½»»»¡£
+*è§£æ³•ä¸€ï¼šç±»ä¼¼äºŽå†’æ³¡æŽ’åºçš„æ€æƒ³ï¼Œä¾æ¬¡æ¯”è¾ƒä¸¤ä¸ªç›¸é‚»çš„å…ƒç´ ï¼Œé‡åˆ°å¶æ•°åœ¨å¥‡æ•°å‰é¢ï¼Œå°±å°†ä¸¤ä¸ªå€¼äº¤æ¢ã€‚
 ***/
 /*
 class Solution {
@@ -29,8 +50,8 @@ public:
 */
 
 /***
-*Ë¼Â·2£ºÀûÓÃ¿Õ¼ä»»Ê±¼ä£»
-*Ê¹ÓÃÒ»¸öÐÂµÄvector´æ´¢,±éÀúÔ­À´µÄvector,ÒÀ´Î½«ÆæÊýºÍÅ¼Êý´æ´¢µ½ÐÂµÄvectorÖÐ¡£
+*æ€è·¯2ï¼šåˆ©ç”¨ç©ºé—´æ¢æ—¶é—´ï¼›
+*ä½¿ç”¨ä¸€ä¸ªæ–°çš„vectorå­˜å‚¨,éåŽ†åŽŸæ¥çš„vector,ä¾æ¬¡å°†å¥‡æ•°å’Œå¶æ•°å­˜å‚¨åˆ°æ–°çš„vectorä¸­ã€‚
 ***/
 /*
 class Solution {
@@ -53,7 +74,7 @@ public:
 */
 
 /***
-Ë¼Â·Èý£ºÀûÓÃSTL¿âº¯Êýstable_partition;
+æ€è·¯ä¸‰ï¼šåˆ©ç”¨STLåº“å‡½æ•°stable_partition;
 ***/
 /*
 bool isEven(int n){
@@ -68,7 +89,7 @@ public:
 */
 
 /***
-*½£Ö¸offerÉÏ½â·¨£º½«ÆæÊýµ÷Õûµ½Å¼ÊýÖ®Ç°£¬Ã»ÓÐ¿¼ÂÇÏà¶ÔÎ»ÖÃ£º
+*å‰‘æŒ‡offerä¸Šè§£æ³•ï¼šå°†å¥‡æ•°è°ƒæ•´åˆ°å¶æ•°ä¹‹å‰ï¼Œæ²¡æœ‰è€ƒè™‘ç›¸å¯¹ä½ç½®ï¼š
 ***/
 /*
 class Solution {
