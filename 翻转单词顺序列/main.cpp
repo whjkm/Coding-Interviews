@@ -4,6 +4,27 @@
 #include <vector>
 using namespace std;
 
+//LeetCode 151
+class Solution {
+public:
+    string reverseWords(string s) {
+        int m = s.size() - 1;
+        string res;
+        while(s[m] == ' ' && m > 0) m--;
+
+        int n = m;
+        while(m >= 0)
+        {
+            while(m>=0 && s[m]!= ' ') m--;
+            res += s.substr(m+1, n-m) + " ";
+            while(m>=0 && s[m]== ' ') m--;
+            n = m;
+        }
+        return res.substr(0, res.size()-1);
+    }
+};
+
+
 class Solution {
 public:
     string ReverseSentence(string str) {
@@ -19,7 +40,7 @@ public:
     }
 };
 
-// Ê¹ÓÃµü´úÆ÷
+// ä½¿ç”¨è¿­ä»£å™¨
 /*
 class Solution {
 public:
@@ -44,7 +65,7 @@ public:
 };
 */
 
-// Ë¼Â·£ºÒ»¸öÒ»¸ö×Ö·û½øĞĞ´¦Àí
+// æ€è·¯ï¼šä¸€ä¸ªä¸€ä¸ªå­—ç¬¦è¿›è¡Œå¤„ç†
 /*
 class Solution {
 public:
@@ -54,49 +75,49 @@ public:
         {
             if(str[i] == ' ')
             {
-                res = " " + tmp + res;   // Óöµ½¿Õ¸ñ¾ÍÔÚµ¥´ÊÇ°Ãæ¼ÓÉÏ¿Õ¸ñ£¬°ÑÖ®Ç°µÄµ¥´Ê¼Óµ½ºóÃæ
+                res = " " + tmp + res;   // é‡åˆ°ç©ºæ ¼å°±åœ¨å•è¯å‰é¢åŠ ä¸Šç©ºæ ¼ï¼ŒæŠŠä¹‹å‰çš„å•è¯åŠ åˆ°åé¢
                 tmp = "";
             }
             else
             {
-                tmp += str[i];         // Ã¿Ò»¸öµ¥´Ê
+                tmp += str[i];         // æ¯ä¸€ä¸ªå•è¯
             }
         }
         if(tmp.size())
-            res = tmp + res;      // ×îºóµÄµ¥´Ê
+            res = tmp + res;      // æœ€åçš„å•è¯
         return res;
     }
 };
 */
 
 /***
-Ë¼Â·£º½øĞĞÁ½´Î·­×ª£¬Ê×ÏÈ¶ÔÕûÌå½øĞĞ·­×ª£»
-È»ºó¶Ôµ¥´Ê½øĞĞ·­×ª¡£
+æ€è·¯ï¼šè¿›è¡Œä¸¤æ¬¡ç¿»è½¬ï¼Œé¦–å…ˆå¯¹æ•´ä½“è¿›è¡Œç¿»è½¬ï¼›
+ç„¶åå¯¹å•è¯è¿›è¡Œç¿»è½¬ã€‚
 ***/
 /*
 class Solution {
 public:
     string ReverseSentence(string str) {
-        ReverseWord(str, 0, str.size() - 1);    // ÕûÌå·­×ªÒ»´Î
+        ReverseWord(str, 0, str.size() - 1);    // æ•´ä½“ç¿»è½¬ä¸€æ¬¡
         int s = 0, e = 0;
         int i = 0;
         while(i < str.size())
         {
-            // Óöµ½¿Õ¸ñÌø¹ı
+            // é‡åˆ°ç©ºæ ¼è·³è¿‡
             while(str[i] == ' ' && i < str.size())
                 i++;
-            s = e = i;  // µ¥´ÊµÄ¿ªÊ¼Î»ÖÃ
-            while(i < str.size() && str[i] != ' ')  // ÕÒµ½µ¥´Ê½áÊøµÄÎ»ÖÃ
+            s = e = i;  // å•è¯çš„å¼€å§‹ä½ç½®
+            while(i < str.size() && str[i] != ' ')  // æ‰¾åˆ°å•è¯ç»“æŸçš„ä½ç½®
             {
                 i++;
                 e++;
             }
-            ReverseWord(str, s, e - 1);      //·­×ªµ¥´Ê
+            ReverseWord(str, s, e - 1);      //ç¿»è½¬å•è¯
         }
         return str;
     }
 private:
-    // ·­×ªstrµÄsµ½e²¿·Ö
+    // ç¿»è½¬strçš„såˆ°eéƒ¨åˆ†
     void ReverseWord(string &str, int s, int e)
     {
         while(s < e)
