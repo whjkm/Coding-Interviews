@@ -7,7 +7,7 @@
 using namespace std;
 
 /***
-*Ë¼Â·£ºÎ¬»¤Ò»¸öÈİÁ¿ÎªkµÄ×î´ó¶Ñ£¬ÓëÊ£ÏÂµÄÔªËØ½øĞĞ±È½Ï£¬½øĞĞ¶Ñµ÷Õû¡£
+*æ€è·¯ï¼šç»´æŠ¤ä¸€ä¸ªå®¹é‡ä¸ºkçš„æœ€å¤§å †ï¼Œä¸å‰©ä¸‹çš„å…ƒç´ è¿›è¡Œæ¯”è¾ƒï¼Œè¿›è¡Œå †è°ƒæ•´ã€‚
 ***/
 class Solution {
 public:
@@ -17,23 +17,23 @@ public:
         for(int i = 0; i < k; ++i){
             res.push_back(input[i]);
         }
-        for(int i = k/2-1; i >= 0; i--){ // ³õÊ¼»¯¶Ñ
+        for(int i = k/2-1; i >= 0; i--){ // åˆå§‹åŒ–å †
             adjustHeap(res, i, k);
         }
         for(int i = k; i < input.size(); i++){
-            if(input[i] < res[0]){   // ´æÔÚ¸üĞ¡µÄÊı×ÖÊ±
+            if(input[i] < res[0]){   // å­˜åœ¨æ›´å°çš„æ•°å­—æ—¶
                 res[0] = input[i];
-                adjustHeap(res, 0, k);   // ÖØĞÂµ÷Õû¶Ñ
+                adjustHeap(res, 0, k);   // é‡æ–°è°ƒæ•´å †
             }
         }
         return res;
     }
-    void adjustHeap(vector<int> &input, int i, int length){//µ÷Õû¶Ñ
+    void adjustHeap(vector<int> &input, int i, int length){//è°ƒæ•´å †
         int temp = input[i], j;
         for(j = 2*i + 1; j <=length; j = j*2 + 1){
-            // ÑØ¹Ø¼ü×Ö½Ï´óµÄº¢×Ó½áµãÏòÏÂÉ¸Ñ¡
-            if(j <= length && input[j] < input[j+1]){
-                ++j;   // ½Ï´ó¹Ø¼ü×ÖµÄÏÂ±ê
+            // æ²¿å…³é”®å­—è¾ƒå¤§çš„å­©å­ç»“ç‚¹å‘ä¸‹ç­›é€‰
+            if(j <= length-1 && input[j] < input[j+1]){
+                ++j;   // è¾ƒå¤§å…³é”®å­—çš„ä¸‹æ ‡
             }
             if(temp >= input[j])
                 break;
@@ -45,18 +45,18 @@ public:
 
     void Heapsort(vector<int> &input, int length){
         for(int i = length/2 - 1; i >= 0; i--){
-            adjustHeap(input, i, length);    //³õÊ¼»¯¶Ñ
+            adjustHeap(input, i, length);    //åˆå§‹åŒ–å †
         }
         for(int i = length-1; i >= 0; i--){
             swap(input[i], input[0]);
-            adjustHeap(input, 0, i);    // ÖØĞÂµ÷Õû¶Ñ
+            adjustHeap(input, 0, i);    // é‡æ–°è°ƒæ•´å †
         }
     }
 };
 
 
 /***
-Ë¼Â·£ºÊ¹ÓÃSTL¶ÑÅÅĞò£¬O(nlogk)
+æ€è·¯ï¼šä½¿ç”¨STLå †æ’åºï¼ŒO(nlogk)
 ***/
 
 /*
@@ -69,18 +69,18 @@ public:
         for(int i = 0; i < k; ++i){
             res.push_back(input[i]);
         }
-        // ½¨¶Ñ
+        // å»ºå †
         make_heap(res.begin(), res.end());
         for(int i = k; i < input.size(); ++i){
             if(input[i] < res[0]){
-                // ³ö¶Ñ£¬È»ºóÔÙÉ¾³ı
+                // å‡ºå †ï¼Œç„¶åå†åˆ é™¤
                 pop_heap(res.begin(), res.end());
                 res.pop_back();
                 res.push_back(input[i]);
                 push_heap(res.begin(), res.end());
             }
         }
-        // ¶ÑÅÅĞò
+        // å †æ’åº
         sort_heap(res.begin(), res.end());
 
         return res;
@@ -89,7 +89,7 @@ public:
 */
 
 /***
-Ë¼Â·£ºÊ¹ÓÃÓÅÏÈ¶ÓÁĞ£¬ÓÅÏÈ¶ÓÁĞµ×²ãÊÇ¶ÑÊµÏÖµÄ¡£O(nlogk)
+æ€è·¯ï¼šä½¿ç”¨ä¼˜å…ˆé˜Ÿåˆ—ï¼Œä¼˜å…ˆé˜Ÿåˆ—åº•å±‚æ˜¯å †å®ç°çš„ã€‚O(nlogk)
 ***/
 /*
 class Solution {
@@ -116,8 +116,8 @@ public:
 */
 
 /***
-*Ë¼Â·£ºÊ¹ÓÃSTLµÄsetÈİÆ÷ÊµÏÖ£¬setºÍmultisetÊÇ»ùÓÚºìºÚÊ÷ÊµÏÖµÄ¡£
-*Î¬»¤Ò»¸ö´óĞ¡ÎªkµÄÊı¾İÈİÆ÷À´´æ´¢×îĞ¡µÄk¸öÊı×Ö; Ê±¼ä¸´ÔÓ¶ÈO(nlogk)¡£
+*æ€è·¯ï¼šä½¿ç”¨STLçš„setå®¹å™¨å®ç°ï¼Œsetå’Œmultisetæ˜¯åŸºäºçº¢é»‘æ ‘å®ç°çš„ã€‚
+*ç»´æŠ¤ä¸€ä¸ªå¤§å°ä¸ºkçš„æ•°æ®å®¹å™¨æ¥å­˜å‚¨æœ€å°çš„kä¸ªæ•°å­—; æ—¶é—´å¤æ‚åº¦O(nlogk)ã€‚
 ***/
 /*
 class Solution {
@@ -127,20 +127,20 @@ public:
         int length = input.size();
         if(input.empty() || k > length || k <=0) return res;
 
-        multiset<int, greater<int>> leastNumbers;   // ´Ó´óµ½Ğ¡ÅÅĞò
-        multiset<int, greater<int>>::iterator setInterator;  // µü´úÆ÷
+        multiset<int, greater<int>> leastNumbers;   // ä»å¤§åˆ°å°æ’åº
+        multiset<int, greater<int>>::iterator setInterator;  // è¿­ä»£å™¨
 
         vector<int>::iterator iter = input.begin();
         leastNumbers.clear();
         for(; iter != input.end(); ++iter){
-            // Ç°k¸öÊıÖ±½Ó²åÈë
+            // å‰kä¸ªæ•°ç›´æ¥æ’å…¥
             if(leastNumbers.size() < k){
                 leastNumbers.insert(*iter);
             }else{
                 setInterator = leastNumbers.begin();
-                // ±È½Ï¶Ñ¶¥ÔªËØºÍÒª²åÈëµÄÔªËØÖ®¼äµÄ¹ØÏµ
+                // æ¯”è¾ƒå †é¡¶å…ƒç´ å’Œè¦æ’å…¥çš„å…ƒç´ ä¹‹é—´çš„å…³ç³»
                 if((*leastNumbers.begin()) > (*iter)){
-                    leastNumbers.erase(setInterator); // É¾³ı¶Ñ¶¥ÔªËØ
+                    leastNumbers.erase(setInterator); // åˆ é™¤å †é¡¶å…ƒç´ 
                     leastNumbers.insert(*iter);
                 }
             }
@@ -155,7 +155,7 @@ public:
 
 
 /****
-Ë¼Â·£º»ùÓÚ¿ìÅÅµÄË¼Â·£¬Ê¹ÓÃpartition¶ÔÊı×é½øĞĞ»®·Ö£¬»®·ÖÎªÁ½²¿·Ö¡£
+æ€è·¯ï¼šåŸºäºå¿«æ’çš„æ€è·¯ï¼Œä½¿ç”¨partitionå¯¹æ•°ç»„è¿›è¡Œåˆ’åˆ†ï¼Œåˆ’åˆ†ä¸ºä¸¤éƒ¨åˆ†ã€‚
 ****/
 /*
 class Solution {
@@ -163,7 +163,7 @@ public:
     vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
         vector<int> res;
         int length = input.size();
-        // ÌØÊâÇé¿öÅĞ¶Ï£¡£¡£¡³¬Ê±µÄÔ­ÒòÔÚÕâ
+        // ç‰¹æ®Šæƒ…å†µåˆ¤æ–­ï¼ï¼ï¼è¶…æ—¶çš„åŸå› åœ¨è¿™
         if(input.empty() || k > length || k<=0) return res;
         int start = 0, end = length - 1;
         int index = Partition(input, start, end);
@@ -182,7 +182,7 @@ public:
         return res;
     }
 
-    // ĞèÒªĞŞ¸Ä´«µİµÄÊı×é£¬Ê¹ÓÃÒıÓÃĞÎÊ½(³¬Ê±)
+    // éœ€è¦ä¿®æ”¹ä¼ é€’çš„æ•°ç»„ï¼Œä½¿ç”¨å¼•ç”¨å½¢å¼(è¶…æ—¶)
     int Partition(vector<int> &input, int start, int end){
         int pivot = input[start];
         while(start < end){
